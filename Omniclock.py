@@ -6,16 +6,16 @@ again = "True"
 
 while again == "True":
     print ()
-    selection = (input("Select mode (case sensitive!):"))
+    selection = (input("Select mode:")).lower()
     
     ## Prints mode list
     if selection == "help":
-        print ("Modes:")
-        print ("dtb: Days to birthday.")
-        print ("cd: Current date.")
-        print ("ct: Current time")
-        print ("ctd: Current time and date")
-        print ("exit: Exits the program.")
+        print ("Modes:\n"
+               "dtb: Days to birthday.\n"
+               "cd: Current date.\n"
+               "ct: Current time.\n"
+               "cdt: Current date and time.\n"
+               "exit: Exits the program.")
         continue
     
     ## Days to Birthday
@@ -37,15 +37,22 @@ while again == "True":
     elif selection == "cd":
         today = date.today()
         print (today)
-
-    ## Shows current time
+        
     elif selection == "ct":
         current = time.localtime()
         current_list = list(current)
-        (yr, "year", mn, "month", dy, "day", hr, "hour", mi, "minute", s, "second")
-        print (current_list)
-        print (time.localtime())
-        print (date.today())
+        current_dt = current_list[3:6]
+        print ("Current time is:")
+        print (str(current_dt[3]) + ":" + str(current_dt[4]) + ":" + str(current_dt[5]))
+
+    ## Shows current date and time
+    elif selection == "cdt":
+        current = time.localtime()
+        current_list = list(current)
+        current_dt = current_list[0:6]
+        print ("Current date and time is:")
+        print (str(date.today()) + " " + str(current_dt[3]) + ":" + str(current_dt[4]) + ":" + str(current_dt[5]))
+
 
     ## Exits program
     elif selection == "exit":
@@ -56,3 +63,7 @@ while again == "True":
     else:
         print ("Invalid entry. Type 'help' for mode list")
 
+##remember time.localtime()
+##time.struct_time(tm_year=2015, tm_mon=12, tm_mday=22,
+##tm_hour=23,tm_min=37, tm_sec=45,
+##tm_wday=1, tm_yday=356, tm_isdst=0)
